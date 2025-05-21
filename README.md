@@ -7,7 +7,7 @@ För att som användare kunna göra en enkel sökning på boktitel i databasen, 
 
 Därefter skriver man in en kort söksträng, exempelvis '_ens_', och får som resultat en lista med boktitlar som innehåller '_ens_', och vilka bokhandlar som har böckerna i lager.
 
-Programmet är skyddat mot SQL-injection genom att använda text()-parameter med kolon-formatet (:placeholder) istället för att ange söksträngen direkt i queryn.
+Programmet ansluter till databasen med hjälp av en _engine_, varefter en _query_ skickas. Programmet är skyddat mot SQL-injection genom att använda text()-parameter med kolon-formatet (:placeholder) istället för att ange söksträngen direkt i queryn.
 
 ### Kort om de olika tabellerna i databasen:
 - Den viktigaste tabellen är _bocker_. Som primärnyckel har använts ISBN13-numret, eftersom detta är världsunikt för varje bok. I tabellen kan man dessutom (förutom bokens titel) få information om dess författare, språk, pris och utgivningsdatum.

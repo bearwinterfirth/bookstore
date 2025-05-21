@@ -1,0 +1,207 @@
+CREATE DATABASE bookstore
+
+USE bookstore
+
+CREATE TABLE forfattare(
+    ID INT PRIMARY KEY,
+    Fornamn NVARCHAR(max),
+    Efternamn NVARCHAR(max),
+    Fodelsedatum DATETIME2
+)
+
+GO
+
+INSERT INTO forfattare VALUES (1, 'Håkan', 'Nesser', '1950-02-21')
+INSERT INTO forfattare VALUES (2, 'Astrid', 'Lindgren', '1907-11-14')
+INSERT INTO forfattare VALUES (3, 'Fredrik', 'Backman', '1981-06-02')
+INSERT INTO forfattare VALUES (4, 'Camilla', 'Läckberg', '1974-08-30')
+INSERT INTO forfattare VALUES (5, 'Jo', 'Nesbo', '1960-03-29')
+INSERT INTO forfattare VALUES (6, 'Vilhelm', 'Moberg', '1898-08-20')
+INSERT INTO forfattare VALUES (7, 'Agatha', 'Christie', '1890-09-15')
+
+GO
+
+CREATE TABLE bocker(
+    ISBN13 VARCHAR(13) PRIMARY KEY,
+    Titel NVARCHAR(max),
+    Sprak NVARCHAR(20),
+    Pris INT,
+    Utgivningsdatum DATETIME2,
+    ForfattareID INT FOREIGN KEY REFERENCES forfattare(ID)
+)
+
+GO
+
+INSERT INTO bocker VALUES (9788203356056, 'Hodejegerne', 'Norska', 159, '2007-05-19', 5)
+INSERT INTO bocker VALUES (9780062073488, 'And then there were none', 'Engelska', 199, '1929-08-19', 7)
+INSERT INTO bocker VALUES (9789137164168, 'Stenhuggaren', 'Svenska', 249, '2004-07-18', 4)
+INSERT INTO bocker VALUES (9789100101596, 'Carambole', 'Svenska', 199, '1998-07-05', 1)
+INSERT INTO bocker VALUES (9789170535291, 'Utvandrarna', 'Svenska', 249, '1948-01-15', 6)
+INSERT INTO bocker VALUES (9789129548938, 'Mästerdetektiven Blomkvist', 'Svenska', 99, '1948-11-07', 2)
+INSERT INTO bocker VALUES (9780007527526, 'The murder of Roger Ackroyd', 'Engelska', 169, '1931-10-02', 7)
+INSERT INTO bocker VALUES (9789137507477, 'En man som heter Ove', 'Svenska', 179, '2014-06-08', 3)
+INSERT INTO bocker VALUES (9789100124502, 'De ensamma', 'Svenska', 219, '2007-07-01', 1)
+INSERT INTO bocker VALUES (9789100133245, 'Raskens', 'Svenska', 249, '1935-05-05', 6)
+INSERT INTO bocker VALUES (9789129657869, 'Madicken', 'Svenska', 199, '1961-02-05', 2)
+INSERT INTO bocker VALUES (9789100100674, 'Fallet G', 'Svenska', 79, '2007-09-10', 1)
+
+GO
+
+CREATE TABLE butiker(
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Namn NVARCHAR(max),
+    Adress NVARCHAR(max)
+)
+
+GO
+
+INSERT INTO butiker VALUES ('Bokmalen', 'Storgatan 15, 145 17 Västerstad')
+INSERT INTO butiker VALUES ('Laslustan', 'Kyrkogatan 33, 418 33 Norrby')
+INSERT INTO butiker VALUES ('Bladvandaren', 'Lillgatan 2, 372 11 Österlunda')
+INSERT INTO butiker VALUES ('Omslaget', 'Stationsvägen 14, 222 42 Söderberg')
+
+GO
+
+CREATE TABLE lagersaldo(
+    ButikID INT FOREIGN KEY REFERENCES butiker(ID),
+    ISBN13 VARCHAR(13) FOREIGN KEY REFERENCES bocker(ISBN13),
+    Antal INT,
+    PRIMARY KEY (ButikID, ISBN13)
+)
+
+GO
+
+INSERT INTO lagersaldo VALUES (1, 9789100124502, 22)
+INSERT INTO lagersaldo VALUES (1, 9780062073488, 100)
+INSERT INTO lagersaldo VALUES (1, 9789137164168, 19)
+INSERT INTO lagersaldo VALUES (1, 9789137507477, 200)
+INSERT INTO lagersaldo VALUES (2, 9788203356056, 210)
+INSERT INTO lagersaldo VALUES (2, 9780062073488, 42)
+INSERT INTO lagersaldo VALUES (2, 9789100100674, 5)
+INSERT INTO lagersaldo VALUES (2, 9789170535291, 3)
+INSERT INTO lagersaldo VALUES (2, 9789100124502, 32)
+INSERT INTO lagersaldo VALUES (3, 9789129548938, 147)
+INSERT INTO lagersaldo VALUES (3, 9789129657869, 98)
+INSERT INTO lagersaldo VALUES (4, 9788203356056, 14)
+INSERT INTO lagersaldo VALUES (4, 9780062073488, 20)
+INSERT INTO lagersaldo VALUES (4, 9789137164168, 1)
+INSERT INTO lagersaldo VALUES (4, 9789100101596, 338)
+INSERT INTO lagersaldo VALUES (4, 9789170535291, 2)
+INSERT INTO lagersaldo VALUES (4, 9780007527526, 4)
+INSERT INTO lagersaldo VALUES (4, 9789100133245, 18)
+
+GO
+
+CREATE TABLE genre(
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Namn NVARCHAR(max)
+)
+
+GO
+
+INSERT INTO genre VALUES ('Barnbok')
+INSERT INTO genre VALUES ('Deckare')
+INSERT INTO genre VALUES ('Klassiker')
+INSERT INTO genre VALUES ('Spänning')
+INSERT INTO genre VALUES ('Komedi')
+
+CREATE TABLE bok_genre(
+    ISBN13 VARCHAR(13) FOREIGN KEY REFERENCES bocker(ISBN13),
+    GenreID INT FOREIGN KEY REFERENCES genre(ID)
+    PRIMARY KEY (ISBN13, GenreID)
+)
+
+GO
+
+INSERT INTO bok_genre VALUES (9788203356056, 2)
+INSERT INTO bok_genre VALUES (9788203356056, 4)
+INSERT INTO bok_genre VALUES (9788203356056, 5)
+INSERT INTO bok_genre VALUES (9780062073488, 2)
+INSERT INTO bok_genre VALUES (9780062073488, 3)
+INSERT INTO bok_genre VALUES (9780062073488, 4)
+INSERT INTO bok_genre VALUES (9789137164168, 2)
+INSERT INTO bok_genre VALUES (9789137164168, 4)
+INSERT INTO bok_genre VALUES (9789100101596, 2)
+INSERT INTO bok_genre VALUES (9789100101596, 4)
+INSERT INTO bok_genre VALUES (9789170535291, 3)
+INSERT INTO bok_genre VALUES (9789129548938, 1)
+INSERT INTO bok_genre VALUES (9789129548938, 2)
+INSERT INTO bok_genre VALUES (9789129548938, 3)
+INSERT INTO bok_genre VALUES (9780007527526, 2)
+INSERT INTO bok_genre VALUES (9780007527526, 3)
+INSERT INTO bok_genre VALUES (9780007527526, 4)
+INSERT INTO bok_genre VALUES (9789137507477, 5)
+INSERT INTO bok_genre VALUES (9789100124502, 2)
+INSERT INTO bok_genre VALUES (9789100124502, 4)
+INSERT INTO bok_genre VALUES (9789100133245, 3)
+INSERT INTO bok_genre VALUES (9789100133245, 4)
+INSERT INTO bok_genre VALUES (9789129657869, 1)
+INSERT INTO bok_genre VALUES (9789100100674, 2)
+INSERT INTO bok_genre VALUES (9789100100674, 4)
+
+GO
+
+CREATE TABLE kunder(
+    ID INT PRIMARY KEY IDENTITY(100,5),
+    Namn NVARCHAR(max),
+    Adress NVARCHAR(max),
+    Telefon NVARCHAR(50)
+)
+
+GO
+
+INSERT INTO kunder VALUES ('Anna Andersson', 'Andvagen 5, 112 36 Alunda', '0739-322348')
+INSERT INTO kunder VALUES ('Bertil Bengtsson', 'Bisonvagen 2, 423 45 Byköping', '0705-234278')
+INSERT INTO kunder VALUES ('Cecilia Cedergren', 'Citrongatan 10, 324 81 Cederberg', '0709-523179')
+
+GO
+
+CREATE TABLE ordrar(
+    ID INT PRIMARY KEY IDENTITY(1000, 1),
+    KundId INT FOREIGN KEY REFERENCES kunder(ID),
+    Orderdatum DATETIME2
+)
+
+GO
+
+INSERT INTO ordrar VALUES (105, '2025-04-05')
+INSERT INTO ordrar VALUES (100, '2025-04-26')
+INSERT INTO ordrar VALUES (105, '2025-05-05')
+INSERT INTO ordrar VALUES (110, '2025-05-11')
+
+GO
+
+CREATE TABLE orderdetaljer(
+    ID INT PRIMARY KEY,
+    OrderID INT FOREIGN KEY REFERENCES ordrar(ID),
+    BokID VARCHAR(13) FOREIGN KEY REFERENCES bocker(ISBN13),
+    Antal INT,
+    ButikID INT FOREIGN KEY REFERENCES butiker(ID)
+)
+
+GO
+
+INSERT INTO orderdetaljer VALUES (1, 1000, 9789100101596, 2, 4)
+INSERT INTO orderdetaljer VALUES (2, 1000, 9789100133245, 1, 4)
+INSERT INTO orderdetaljer VALUES (3, 1001, 9789100100674, 1, 2)
+INSERT INTO orderdetaljer VALUES (4, 1001, 9789129657869, 1, 3)
+INSERT INTO orderdetaljer VALUES (5, 1002, 9780062073488, 2, 1)
+INSERT INTO orderdetaljer VALUES (6, 1003, 9789137164168, 1, 1)
+
+GO
+
+
+SELECT 
+    CONCAT(Fornamn, ' ', Efternamn) AS 'Namn',
+    CONCAT((DATEDIFF(YEAR, CONVERT(DATETIME2, Fodelsedatum), GETDATE())), ' år') AS 'Ålder',
+    COUNT (DISTINCT Titel) AS 'Antal titlar',
+    SUM(Pris * Antal) AS 'Lagervärde'
+INTO TitlarPerForfattare
+FROM forfattare
+JOIN bocker ON bocker.ForfattareID = forfattare.ID
+JOIN lagersaldo ON lagersaldo.ISBN13 = bocker.ISBN13
+GROUP BY
+    CONCAT(Fornamn, ' ', Efternamn),
+    DATEDIFF(YEAR, CONVERT(DATETIME2, Fodelsedatum), GETDATE())
+
+SELECT * FROM TitlarPerForfattare
