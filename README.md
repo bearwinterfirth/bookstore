@@ -17,4 +17,14 @@ Programmet är skyddat mot SQL-injection genom att använda text()-parameter med
 - Ordrarna är också länkade till _bocker_-tabellen via tabellen _orderdetaljer_. Varje kund kan ha gjort flera ordrar, varje order kan ha innehållit flera böcker, från flera olika butiker, och varje bok kan ha beställts i flera olika ordrar. Detta sammanfattas i den omfattande _many-to-many_-tabellen _orderdetaljer_.
 - Slutligen finns tabellen _butiker_, med namn och adress, och en tabell med _lagersaldo_ för varje bok och varje butik. Detta är kopplat till _bocker_ via ISBN13-numret, och till _butiker_ via _ButikID_.
 
-Vi har även den separata vyn _TitlarPerForfattare_ som skapats med ett enkelt SELECT-kommando. Här ser man lagervärdet för varje författare, det vill säga det totala värdet av samtliga författarens böcker som finns i lager i någon av de fyra butikerna.
+Därutöver finns den separata vyn _TitlarPerForfattare_ som skapats med ett enkelt SELECT-kommando. Här ser man lagervärdet för varje författare, det vill säga det totala värdet av samtliga författarens böcker som finns i lager i någon av de fyra butikerna.
+
+### Testdata i databasen
+Databasen ska endast efterlikna en bokhandel(-koncern) i miniatyr, och innehåller därför endast ett fåtal testdata:
+- 7 författare (som skrivit 1-3 böcker vardera)
+- 12 boktitlar
+- 5 litteraturgenrer
+- 4 butiker
+- 3 kunder
+
+För den som vill använda _book_search_ och vill vara säker på att få någon träff, kan det vara bra att veta att följande titlar ingår i databasen: _And then there were none_, _Hodejegerne_, _Raskens_, _En man som heter Ove_, _Stenhuggaren_, _Madicken_, _De ensamma_, _Mästerdetektiven Blomkvist_, _The murder of Roger Ackroyd_, _Carambole_ och _Fallet G_.
