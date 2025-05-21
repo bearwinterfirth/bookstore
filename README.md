@@ -1,6 +1,6 @@
 ## Om databasen _bookstore_
 Databasen _bookstore_ finns lagrad i backup-filen _BjornWinterfjord.bak_. Databasen är upplagd som en bokhandel i miniatyr, med ett fåtal böcker, skrivna av ett fåtal författare som säljs i ett fåtal bokhandlar inom samma koncern.
-- I undermappen _Database Diagrams_ finns ett ER-diagram som visar hur databasens olika tabeller är länkade till varandra.
+- I undermappen _Database Diagrams_ finns ett ER-diagram som visar hur databasens olika tabeller är kopplade till varandra.
 - Filen _bookstore.sql_ visar hur databasens tabeller och innehåll har skapats. I slutet av filen visas även hur den speciella vyn _TitlarPerForfattare_ har valts ut. Här framgår det totala lagervärdet för böckerna i bokhandlar, räknat per författare. 
 ### Sökning i databasen
 För att som användare kunna göra en enkel sökning på boktitel i databasen, körs filen _book_search.py_. (__Man kan behöva ändra servernamnet på rad 6 för att kunna köra filen!__)
