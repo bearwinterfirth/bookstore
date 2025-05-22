@@ -13,7 +13,7 @@ try:
     engine = create_engine(url_string)
     with engine.connect() as connection:
         print(f"\nUppkopplad mot databasen {database_name}")
-except Exception as e:
+except Exception as e:      # ska inte användas i skarpt läge!
     print("Error while connecting to database:\n")
     print(e)
 
@@ -38,6 +38,7 @@ def search_for_book(search_string):
     GROUP BY Titel, bocker.ISBN13, butiker.Namn, CONCAT(Fornamn, ' ', Efternamn), lagersaldo.antal""")
 
     with engine.connect() as conn:
+        # skriver ut resultatet av sökningen
         result = conn.execute(query, {"placeholder": search_string})
         print(f"{'TITEL'.ljust(27)}{'ISBN'.ljust(20)}{'FÖRFATTARE'.ljust(20)}{'BOKHANDEL'.ljust(15)}{'LAGERSALDO'}")
 
@@ -47,7 +48,8 @@ def search_for_book(search_string):
 
 
 while True:
-    search_string=str(input("\nSkriv en del av en boktitel, eller q för att avsluta. "))
+    # användaren skriver en söksträng
+    search_string=str(input("\nSkriv en del av en boktitel, eller q för att avsluta: "))
     if search_string=="q":
         break
     else:
