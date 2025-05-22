@@ -27,4 +27,4 @@ Databasen ska endast efterlikna en bokhandel(-koncern) i miniatyr, och innehåll
 - 4 butiker
 - 3 kunder
 
-För den som vill använda _book_search_ och vill vara säker på att få någon träff, kan det vara bra att veta att följande titlar ingår i databasen: _And then there were none_, _Hodejegerne_, _Raskens_, _En man som heter Ove_, _Stenhuggaren_, _Madicken_, _De ensamma_, _Mästerdetektiven Blomkvist_, _The murder of Roger Ackroyd_, _Carambole_ och _Fallet G_.
+För den som vill använda _book_search_ och vill vara säker på att få någon träff, kan det vara bra att veta att följande titlar ingår i databasen: _Utvandrarna_, _And then there were none_, _Hodejegerne_, _Raskens_, _En man som heter Ove_, _Stenhuggaren_, _Madicken_, _De ensamma_, _Mästerdetektiven Blomkvist_, _The murder of Roger Ackroyd_, _Carambole_ och _Fallet G_.
