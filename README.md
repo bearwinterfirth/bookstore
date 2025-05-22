@@ -11,9 +11,9 @@ Programmet ansluter till databasen med hjälp av en _engine_, varefter en _query
 
 ### Kort om de olika tabellerna i databasen:
 - Den viktigaste tabellen är _bocker_. Som primärnyckel har använts ISBN13-numret, eftersom detta är världsunikt för varje bok. I tabellen kan man dessutom (förutom bokens titel) få information om dess författare, språk, pris och utgivningsdatum.
-- Eftersom vi har en _many-to-many_-relation mellan _bocker_ och _genrer_ (varje bok kan tillhöra flera genrer, och varje genre kan omfatta flera böcker), gjordes en separat tabell med _genre-ID_, och en _bok_genre_-tabell som länkade vaje bok till en eller flera genrer (och varje genre till en eller flera böcker).
+- Eftersom vi har en _many-to-many_-relation mellan _bocker_ och _genrer_ (varje bok kan tillhöra flera genrer, och varje genre kan omfatta flera böcker), finns en separat tabell med _genre-ID_, och en _bok_genre_-tabell som länkade vaje bok till en eller flera genrer (och varje genre till en eller flera böcker).
 - Information om varje författare (Förnamn, Efternamn och födelsedatum) lagrades också i en separat tabell (_forfattare_) som länkades till _bocker_ via _ForfattareID_.
-- Varje kund som lagt en order hamnar förstås i butikens databas, närmare bestämt i tabellen _kunder_, med information om adress och telefonnummer. Varje kund kan ha lagt en eller flera _ordrar_ som kopplas till kunden via KundId.
+- Varje kund som lagt en order hamnar förstås i butikens databas, närmare bestämt i tabellen _kunder_, med information om kundens adress och telefonnummer. Varje kund kan ha lagt en eller flera _ordrar_ som kopplas till kunden via _KundId_.
 - Ordrarna är också länkade till _bocker_-tabellen via tabellen _orderdetaljer_. Varje kund kan ha gjort flera ordrar, varje order kan ha innehållit flera böcker, från flera olika butiker, och varje bok kan ha beställts i flera olika ordrar. Detta sammanfattas i den omfattande _many-to-many_-tabellen _orderdetaljer_.
 - Slutligen finns tabellen _butiker_, med namn och adress, och en tabell med _lagersaldo_ för varje bok och varje butik. Detta är kopplat till _bocker_ via ISBN13-numret, och till _butiker_ via _ButikID_.
 
